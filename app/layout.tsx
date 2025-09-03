@@ -17,7 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable}
+   `}
+      >
+        <div
+          className={`fixed top-0 left-0 w-full h-full bg-[url('/bilnet.png')] bg-cover -z-10 flex items-center justify-center`}
+        ></div>
         {children}
         <Analytics />
       </body>

@@ -308,13 +308,13 @@ export default function QuizHomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen  p-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center justify-center gap-3 m-4">
             <Trophy className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold text-foreground">
+            <h1 className="text-4xl font-bold text-white">
               Quiz Yarışması
             </h1>
             <Trophy className="h-8 w-8 text-primary" />
@@ -500,7 +500,7 @@ function AdminPanel({
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen  p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -972,13 +972,13 @@ function QuizGame({
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header with Progress */}
         <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center justify-center gap-3 m-4">
             <Clock className="h-6 w-6 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="text-3xl font-bold text-white">
               Quiz Yarışması
             </h1>
           </div>
@@ -1117,7 +1117,7 @@ function QuizGame({
                         <Badge variant="secondary" className="mr-2">
                           {String.fromCharCode(65 + index)}
                         </Badge>
-                        <p className='text-wrap'>{option}</p>
+                        <p className="text-wrap">{option}</p>
                       </Button>
                     ))}
                   </div>
@@ -1218,7 +1218,7 @@ function QuizResults({
     teams.reduce((sum, team) => sum + team.score, 0) / teams.length
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen  p-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <Trophy className="h-16 w-16 text-primary mx-auto mb-4" />
