@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -31,6 +31,8 @@ import {
   Edit,
   Save,
   X,
+  SkipForward,
+  ChevronRight,
 } from 'lucide-react'
 
 interface Team {
@@ -244,6 +246,7 @@ let sampleQuestions = [
     correctAnswer: 3,
   },
 ]
+
 
 export default function QuizHomePage() {
   const [teams, setTeams] = useState<Team[]>([
@@ -596,7 +599,9 @@ function AdminPanel({
             {/* Existing Questions */}
             <Card>
               <CardHeader>
-                <CardTitle>Mevcut Sorular ({questions.length})</CardTitle>
+                <CardTitle className="text-xl text-center">
+                  Mevcut Sorular ({questions.length})
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -860,6 +865,8 @@ function QuizGame({
   const [showResults, setShowResults] = useState(false)
   const [allAnswersSubmitted, setAllAnswersSubmitted] = useState(false)
   const [quizFinished, setQuizFinished] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(30) // 30 seconds per question
+  const [timerActive, setTimerActive] = useState(true)
   const [quizStats, setQuizStats] = useState<QuizStats>({
     totalQuestions: sampleQuestions.length,
     correctAnswers: teams.reduce((acc, team) => ({ ...acc, [team.id]: 0 }), {}),
@@ -871,6 +878,23 @@ function QuizGame({
 
   const currentQuestion = sampleQuestions[currentQuestionIndex]
   const isLastQuestion = currentQuestionIndex === sampleQuestions.length - 1
+
+  useEffect(() => {
+    if (timerActive && timeLeft > 0 && !showResults) {
+      const timer = setTimeout(() => {
+        setTimeLeft(timeLeft - 1)
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+    // Otomatik geçiş kaldırıldı
+  }, [timeLeft, timerActive, showResults])
+
+  useEffect(() => {
+    if (!showResults) {
+      setTimeLeft(30)
+      setTimerActive(true)
+    }
+  }, [currentQuestionIndex, showResults])
 
   const handleTeamAnswer = (teamId: string, answerIndex: number) => {
     setTeamAnswers((prev) => ({
@@ -884,13 +908,14 @@ function QuizGame({
     return submittedCount === teams.length
   }
 
-  const showQuestionResults = () => {
-    if (!checkAllAnswersSubmitted()) {
+  const showQuestionResults = (forceShow = false) => {
+    if (!forceShow && !checkAllAnswersSubmitted()) {
       alert('Tüm takımlar cevap vermeden sonuçları gösteremezsiniz!')
       return
     }
 
-    // Calculate scores and update statistics
+    setTimerActive(false)
+
     const updatedTeams = teams.map((team) => {
       const teamAnswer = teamAnswers[team.id]
       const isCorrect = teamAnswer === currentQuestion.correctAnswer
@@ -927,6 +952,10 @@ function QuizGame({
     setAllAnswersSubmitted(true)
   }
 
+  const forceAdvance = () => {
+    showQuestionResults(true)
+  }
+
   const nextQuestion = () => {
     if (isLastQuestion) {
       setQuizFinished(true)
@@ -953,9 +982,48 @@ function QuizGame({
               Quiz Yarışması
             </h1>
           </div>
-          <Badge variant="secondary" className="text-lg px-4 py-2">
-            Soru {currentQuestionIndex + 1} / {sampleQuestions.length}
-          </Badge>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <Badge variant="secondary" className="text-lg px-4 py-2">
+              Soru {currentQuestionIndex + 1} / {sampleQuestions.length}
+            </Badge>
+            {!showResults && (
+              <div className="relative flex items-center justify-center">
+                <svg
+                  className="w-16 h-16 transform -rotate-90"
+                  viewBox="0 0 36 36"
+                >
+                  {/* Background circle */}
+                  <path
+                    className="text-gray-200"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="transparent"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  {/* Progress circle */}
+                  <path
+                    className={
+                      timeLeft <= 10 ? 'text-red-500' : 'text-orange-500'
+                    }
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    fill="transparent"
+                    strokeDasharray={`${(timeLeft / 30) * 100}, 100`}
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span
+                    className={`text-lg font-bold ${
+                      timeLeft <= 10 ? 'text-red-500' : 'text-orange-500'
+                    }`}
+                  >
+                    {timeLeft}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Current Scores */}
@@ -995,7 +1063,7 @@ function QuizGame({
                   className={`p-4 border-2 rounded-lg ${
                     showResults
                       ? index === currentQuestion.correctAnswer
-                        ? 'border-secondary bg-secondary/10  text-black'
+                        ? 'border-secondary bg-secondary/10 text-black'
                         : 'border-border bg-muted'
                       : 'border-border bg-card hover:border-primary/50 cursor-pointer'
                   }`}
@@ -1049,7 +1117,7 @@ function QuizGame({
                         <Badge variant="secondary" className="mr-2">
                           {String.fromCharCode(65 + index)}
                         </Badge>
-                        {option}
+                        <p className='text-wrap'>{option}</p>
                       </Button>
                     ))}
                   </div>
@@ -1076,17 +1144,17 @@ function QuizGame({
                   return (
                     <div
                       key={team.id}
-                      className={`p-4 rounded-lg border-2 ${
+                      className={`p-4 rounded-lg ${
                         isCorrect
-                          ? 'border-white  bg-green-400/30'
-                          : 'border-destructive bg-destructive/10'
+                          ? 'bg-green-500/40'
+                          : 'border-2 border-destructive bg-destructive/10'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-semibold">{team.name}</span>
                         <div className="flex items-center gap-2">
                           {isCorrect ? (
-                            <CheckCircle className="h-5 w-5 text-secondary" />
+                            <CheckCircle className="h-5 w-5 text-green-600" />
                           ) : (
                             <XCircle className="h-5 w-5 text-destructive" />
                           )}
@@ -1111,16 +1179,23 @@ function QuizGame({
         {/* Action Buttons */}
         <div className="text-center space-x-4">
           {!showResults ? (
-            <Button
-              onClick={showQuestionResults}
-              size="lg"
-              disabled={!checkAllAnswersSubmitted()}
-            >
-              Sonuçları Göster
-            </Button>
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => showQuestionResults()}
+                size="lg"
+                disabled={!checkAllAnswersSubmitted()}
+              >
+                Sonuçları Göster
+              </Button>
+              <Button onClick={forceAdvance} variant="outline" size="lg">
+                <SkipForward className="h-4 w-4 mr-2" />
+                İlerle
+              </Button>
+            </div>
           ) : (
             <Button onClick={nextQuestion} size="lg">
               {isLastQuestion ? "Quiz'i Bitir" : 'Sonraki Soru'}
+              <ChevronRight className="h-4 w-4 ml-2" />
             </Button>
           )}
         </div>
