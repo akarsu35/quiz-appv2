@@ -1,15 +1,21 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
+import { Progress } from '@/components/ui/progress'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Trophy,
   Users,
@@ -25,7 +31,7 @@ import {
   Edit,
   Save,
   X,
-} from "lucide-react"
+} from 'lucide-react'
 
 interface Team {
   id: string
@@ -46,47 +52,207 @@ interface QuizStats {
   teamAnswerHistory: { [teamId: string]: (number | null)[] }
 }
 
-let sampleQuestions: Question[] = [
+let sampleQuestions = [
   {
     id: 1,
-    question: "Türkiye'nin başkenti neresidir?",
-    options: ["İstanbul", "Ankara", "İzmir", "Bursa"],
-    correctAnswer: 1,
-  },
-  {
-    id: 2,
-    question: "Dünya'nın en büyük okyanusu hangisidir?",
-    options: ["Atlantik", "Hint", "Pasifik", "Arktik"],
+    question: 'Hangisinin sayısı daha fazladır?',
+    options: [
+      'Dünya’daki kum tanesi sayısı',
+      'Samanyolu’ndaki yıldız sayısı',
+      'İnsan vücudundaki hücre sayısı',
+      'Dünya’daki ağaç sayısı',
+    ],
     correctAnswer: 2,
   },
   {
+    id: 2,
+    question: 'Hangisinin toplam uzunluğu daha fazladır?',
+    options: [
+      'Dünya’daki tüm DNA iplikleri',
+      'Dünya’daki tüm yollar',
+      'Dünya’daki tüm nehirler',
+      'Dünya’daki tüm tren rayları',
+    ],
+    correctAnswer: 0,
+  },
+  {
     id: 3,
-    question: "1 + 1 = ?",
-    options: ["1", "2", "3", "4"],
+    question: 'Hangi olay daha sık yaşanır?',
+    options: [
+      'Kalbin bir yılda attığı toplam sayı',
+      'Bir yılda insanların toplu olarak göz kırpma sayısı',
+      'Bir yılda dünyada satılan kitap sayısı',
+      'Bir yılda doğan bebek sayısı',
+    ],
     correctAnswer: 1,
   },
   {
     id: 4,
-    question: "Hangi gezegen Güneş'e en yakındır?",
-    options: ["Venüs", "Merkür", "Mars", "Dünya"],
-    correctAnswer: 1,
+    question: 'Hangi yapının yüzey alanı daha büyüktür?',
+    options: [
+      'İnsan akciğerlerindeki alveoller',
+      'Bir futbol sahası',
+      'Dünyadaki en büyük göl',
+      'Ay’ın yüzeyi',
+    ],
+    correctAnswer: 3,
   },
   {
     id: 5,
-    question: "JavaScript hangi yılda oluşturulmuştur?",
-    options: ["1993", "1995", "1997", "1999"],
+    question: 'Hangisi daha hızlıdır?',
+    options: ['Işık', 'Ses', 'Formula 1 arabası', 'Jet uçağı'],
+    correctAnswer: 0,
+  },
+  {
+    id: 6,
+    question: 'Hangisinin enerjisi daha büyüktür?',
+    options: [
+      'Hiroşima’ya atılan atom bombası',
+      'Bir yıldırım çarpması',
+      'Güneş’in 1 saniyede yaydığı enerji',
+      'Bir insanın ömür boyu yaktığı kalori',
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 7,
+    question: 'Hangisi daha ağırdır?',
+    options: [
+      'Büyük Çin Seddi',
+      'Everest Dağı',
+      'Tüm dünyadaki karıncalar',
+      'Tüm dünyadaki insanlar',
+    ],
     correctAnswer: 1,
+  },
+  {
+    id: 8,
+    question: 'Hangisinin hacmi daha büyüktür?',
+    options: [
+      'Dünyadaki tüm buzullar',
+      'Amazon Nehri',
+      'Karadeniz',
+      'Tüm okyanuslar',
+    ],
+    correctAnswer: 3,
+  },
+  {
+    id: 9,
+    question: 'Hangisinin sayısı daha fazladır?',
+    options: [
+      'İnsan beynindeki nöronlar',
+      'Dünya’daki tavuklar',
+      'Dünya’daki şehirler',
+      'Dünya’daki kitaplar',
+    ],
+    correctAnswer: 1,
+  },
+  {
+    id: 10,
+    question: 'Hangisinin ömrü daha uzundur?',
+    options: ['Kaplumbağa', 'Balina', 'Ağaç (Sekoya)', 'İnsan'],
+    correctAnswer: 2,
+  },
+  {
+    id: 11,
+    question: 'Hangisinin sıcaklığı daha yüksektir?',
+    options: [
+      'Güneş’in yüzeyi',
+      'Volkan lavı',
+      'Yıldırım çakması',
+      'Mum alevi',
+    ],
+    correctAnswer: 2,
+  },
+  {
+    id: 12,
+    question: 'Hangisi daha eskidir?',
+    options: ['Ay', 'Dünya', 'Güneş', 'Samanyolu Galaksisi'],
+    correctAnswer: 3,
+  },
+  {
+    id: 13,
+    question: 'Hangisi daha küçüktür?',
+    options: ['Atom', 'Elektron', 'Proton', 'Hücre'],
+    correctAnswer: 1,
+  },
+  {
+    id: 14,
+    question: 'Hangisinin hızı daha düşüktür?',
+    options: ['Kaplumbağa', 'Salyangoz', 'İnsan yürüyüşü', 'Koşan kedi'],
+    correctAnswer: 1,
+  },
+  {
+    id: 15,
+    question: 'Hangisinin sayısı daha fazladır?',
+    options: [
+      'Dünya’daki planktonlar',
+      'Dünya’daki kuşlar',
+      'Dünya’daki arabalar',
+      'Dünya’daki bilgisayarlar',
+    ],
+    correctAnswer: 0,
+  },
+  {
+    id: 16,
+    question: 'Hangisi daha büyüktür?',
+    options: [
+      'Dünyanın ekvator uzunluğu',
+      'Ay’ın çevresi',
+      'Mars’ın çevresi',
+      'Türkiye’nin sınır uzunluğu',
+    ],
+    correctAnswer: 0,
+  },
+  {
+    id: 17,
+    question: 'Hangisinin toplam uzunluğu daha fazladır?',
+    options: [
+      'İnsan damarları',
+      'Dünya’daki tüm tren yolları',
+      'Dünya’daki tüm otoyollar',
+      'Amazon Nehri',
+    ],
+    correctAnswer: 0,
+  },
+  {
+    id: 18,
+    question: 'Hangisinin kütlesi daha büyüktür?',
+    options: [
+      'Everest Dağı',
+      'Dünyadaki tüm atmosfer',
+      'Dünyadaki tüm insanlar',
+      'Dünyadaki tüm balıklar',
+    ],
+    correctAnswer: 1,
+  },
+  {
+    id: 19,
+    question: 'Hangisi daha parlaktır?',
+    options: ['Güneş', 'Dolunay', 'Yıldırım', 'Venüs gezegeni'],
+    correctAnswer: 0,
+  },
+  {
+    id: 20,
+    question: 'Hangisi daha uzundur?',
+    options: [
+      'Nil Nehri',
+      'Amazon Nehri',
+      'Büyük Çin Seddi',
+      'Dünyanın çevresi',
+    ],
+    correctAnswer: 3,
   },
 ]
 
 export default function QuizHomePage() {
   const [teams, setTeams] = useState<Team[]>([
-    { id: "1", name: "Takım A", score: 0 },
-    { id: "2", name: "Takım B", score: 0 },
-    { id: "3", name: "Takım C", score: 0 },
-    { id: "4", name: "Takım D", score: 0 },
+    { id: '1', name: 'Takım A', score: 0 },
+    { id: '2', name: 'Takım B', score: 0 },
+    { id: '3', name: 'Takım C', score: 0 },
+    { id: '4', name: 'Takım D', score: 0 },
   ])
-  const [newTeamName, setNewTeamName] = useState("")
+  const [newTeamName, setNewTeamName] = useState('')
   const [quizStarted, setQuizStarted] = useState(false)
   const [showAdminPanel, setShowAdminPanel] = useState(false)
   const [questions, setQuestions] = useState<Question[]>(sampleQuestions)
@@ -99,7 +265,7 @@ export default function QuizHomePage() {
         score: 0,
       }
       setTeams([...teams, newTeam])
-      setNewTeamName("")
+      setNewTeamName('')
     }
   }
 
@@ -110,7 +276,11 @@ export default function QuizHomePage() {
   }
 
   const updateTeamName = (teamId: string, newName: string) => {
-    setTeams(teams.map((team) => (team.id === teamId ? { ...team, name: newName } : team)))
+    setTeams(
+      teams.map((team) =>
+        team.id === teamId ? { ...team, name: newName } : team
+      )
+    )
   }
 
   const startQuiz = () => {
@@ -121,7 +291,13 @@ export default function QuizHomePage() {
   }
 
   if (showAdminPanel) {
-    return <AdminPanel questions={questions} setQuestions={setQuestions} onBack={() => setShowAdminPanel(false)} />
+    return (
+      <AdminPanel
+        questions={questions}
+        setQuestions={setQuestions}
+        onBack={() => setShowAdminPanel(false)}
+      />
+    )
   }
 
   if (quizStarted) {
@@ -135,11 +311,20 @@ export default function QuizHomePage() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Trophy className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold text-foreground">Quiz Yarışması</h1>
+            <h1 className="text-4xl font-bold text-foreground">
+              Quiz Yarışması
+            </h1>
             <Trophy className="h-8 w-8 text-primary" />
           </div>
-          <p className="text-muted-foreground text-lg">Takımınızı kurun ve heyecan verici quiz yarışmasına katılın!</p>
-          <Button variant="outline" size="sm" onClick={() => setShowAdminPanel(true)} className="mt-4">
+          <p className="text-muted-foreground text-lg">
+            Takımınızı kurun ve heyecan verici quiz yarışmasına katılın!
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowAdminPanel(true)}
+            className="mt-4"
+          >
             <Settings className="h-4 w-4 mr-2" />
             Yönetim Paneli
           </Button>
@@ -163,7 +348,7 @@ export default function QuizHomePage() {
                   placeholder="Takım adını girin..."
                   value={newTeamName}
                   onChange={(e) => setNewTeamName(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && addTeam()}
+                  onKeyPress={(e) => e.key === 'Enter' && addTeam()}
                 />
               </div>
               <Button onClick={addTeam} className="mt-6">
@@ -184,7 +369,9 @@ export default function QuizHomePage() {
                         </Badge>
                         <Input
                           value={team.name}
-                          onChange={(e) => updateTeamName(team.id, e.target.value)}
+                          onChange={(e) =>
+                            updateTeamName(team.id, e.target.value)
+                          }
                           className="border-none p-0 h-auto text-base font-medium"
                         />
                       </div>
@@ -207,9 +394,15 @@ export default function QuizHomePage() {
             {/* Team Count Info */}
             <div className="text-center p-4 bg-muted rounded-lg">
               <p className="text-muted-foreground">
-                Toplam <span className="font-semibold text-foreground">{teams.length}</span> takım
+                Toplam{' '}
+                <span className="font-semibold text-foreground">
+                  {teams.length}
+                </span>{' '}
+                takım
                 {teams.length < 2 && (
-                  <span className="text-destructive ml-2">(Quiz başlatmak için en az 2 takım gerekli)</span>
+                  <span className="text-destructive ml-2">
+                    (Quiz başlatmak için en az 2 takım gerekli)
+                  </span>
                 )}
               </p>
             </div>
@@ -224,7 +417,11 @@ export default function QuizHomePage() {
           <CardContent className="p-4">
             <div className="text-center">
               <p className="text-muted-foreground">
-                Quiz <span className="font-semibold text-foreground">{questions.length}</span> sorudan oluşuyor
+                Quiz{' '}
+                <span className="font-semibold text-foreground">
+                  {questions.length}
+                </span>{' '}
+                sorudan oluşuyor
               </p>
             </div>
           </CardContent>
@@ -257,13 +454,16 @@ function AdminPanel({
 }) {
   const [editingQuestion, setEditingQuestion] = useState<Question | null>(null)
   const [newQuestion, setNewQuestion] = useState<Partial<Question>>({
-    question: "",
-    options: ["", "", "", ""],
+    question: '',
+    options: ['', '', '', ''],
     correctAnswer: 0,
   })
 
   const addQuestion = () => {
-    if (newQuestion.question && newQuestion.options?.every((opt) => opt.trim())) {
+    if (
+      newQuestion.question &&
+      newQuestion.options?.every((opt) => opt.trim())
+    ) {
       const question: Question = {
         id: Math.max(...questions.map((q) => q.id), 0) + 1,
         question: newQuestion.question,
@@ -272,15 +472,17 @@ function AdminPanel({
       }
       setQuestions([...questions, question])
       setNewQuestion({
-        question: "",
-        options: ["", "", "", ""],
+        question: '',
+        options: ['', '', '', ''],
         correctAnswer: 0,
       })
     }
   }
 
   const updateQuestion = (updatedQuestion: Question) => {
-    setQuestions(questions.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q)))
+    setQuestions(
+      questions.map((q) => (q.id === updatedQuestion.id ? updatedQuestion : q))
+    )
     setEditingQuestion(null)
   }
 
@@ -289,7 +491,7 @@ function AdminPanel({
   }
 
   const updateNewQuestionOption = (index: number, value: string) => {
-    const newOptions = [...(newQuestion.options || ["", "", "", ""])]
+    const newOptions = [...(newQuestion.options || ['', '', '', ''])]
     newOptions[index] = value
     setNewQuestion({ ...newQuestion, options: newOptions })
   }
@@ -300,8 +502,12 @@ function AdminPanel({
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Quiz Yönetim Paneli</h1>
-            <p className="text-muted-foreground">Soruları yönetin ve quiz ayarlarını düzenleyin</p>
+            <h1 className="text-3xl font-bold text-foreground">
+              Quiz Yönetim Paneli
+            </h1>
+            <p className="text-muted-foreground">
+              Soruları yönetin ve quiz ayarlarını düzenleyin
+            </p>
           </div>
           <Button onClick={onBack} variant="outline">
             <X className="h-4 w-4 mr-2" />
@@ -328,7 +534,12 @@ function AdminPanel({
                     id="question-text"
                     placeholder="Sorunuzu buraya yazın..."
                     value={newQuestion.question}
-                    onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })}
+                    onChange={(e) =>
+                      setNewQuestion({
+                        ...newQuestion,
+                        question: e.target.value,
+                      })
+                    }
                   />
                 </div>
 
@@ -346,14 +557,27 @@ function AdminPanel({
                       <div className="flex gap-2">
                         <Input
                           id={`option-${index}`}
-                          placeholder={`Seçenek ${String.fromCharCode(65 + index)}`}
-                          value={newQuestion.options?.[index] || ""}
-                          onChange={(e) => updateNewQuestionOption(index, e.target.value)}
+                          placeholder={`Seçenek ${String.fromCharCode(
+                            65 + index
+                          )}`}
+                          value={newQuestion.options?.[index] || ''}
+                          onChange={(e) =>
+                            updateNewQuestionOption(index, e.target.value)
+                          }
                         />
                         <Button
-                          variant={newQuestion.correctAnswer === index ? "default" : "outline"}
+                          variant={
+                            newQuestion.correctAnswer === index
+                              ? 'default'
+                              : 'outline'
+                          }
                           size="sm"
-                          onClick={() => setNewQuestion({ ...newQuestion, correctAnswer: index })}
+                          onClick={() =>
+                            setNewQuestion({
+                              ...newQuestion,
+                              correctAnswer: index,
+                            })
+                          }
                         >
                           <CheckCircle className="h-4 w-4" />
                         </Button>
@@ -389,7 +613,8 @@ function AdminPanel({
                   ))}
                   {questions.length === 0 && (
                     <div className="text-center py-8 text-muted-foreground">
-                      Henüz soru eklenmemiş. Yukarıdaki formu kullanarak soru ekleyebilirsiniz.
+                      Henüz soru eklenmemiş. Yukarıdaki formu kullanarak soru
+                      ekleyebilirsiniz.
                     </div>
                   )}
                 </div>
@@ -444,20 +669,28 @@ function AdminPanel({
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="text-center p-4 bg-muted rounded-lg">
-                    <p className="text-2xl font-bold text-primary">{questions.length}</p>
+                    <p className="text-2xl font-bold text-primary">
+                      {questions.length}
+                    </p>
                     <p className="text-sm text-muted-foreground">Toplam Soru</p>
                   </div>
                   <div className="text-center p-4 bg-muted rounded-lg">
                     <p className="text-2xl font-bold text-primary">0</p>
-                    <p className="text-sm text-muted-foreground">Oynanan Quiz</p>
+                    <p className="text-sm text-muted-foreground">
+                      Oynanan Quiz
+                    </p>
                   </div>
                   <div className="text-center p-4 bg-muted rounded-lg">
                     <p className="text-2xl font-bold text-primary">0</p>
-                    <p className="text-sm text-muted-foreground">Toplam Katılımcı</p>
+                    <p className="text-sm text-muted-foreground">
+                      Toplam Katılımcı
+                    </p>
                   </div>
                   <div className="text-center p-4 bg-muted rounded-lg">
                     <p className="text-2xl font-bold text-primary">0%</p>
-                    <p className="text-sm text-muted-foreground">Ortalama Başarı</p>
+                    <p className="text-sm text-muted-foreground">
+                      Ortalama Başarı
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -500,7 +733,12 @@ function QuestionCard({
             <Label>Soru Metni</Label>
             <Textarea
               value={editedQuestion.question}
-              onChange={(e) => setEditedQuestion({ ...editedQuestion, question: e.target.value })}
+              onChange={(e) =>
+                setEditedQuestion({
+                  ...editedQuestion,
+                  question: e.target.value,
+                })
+              }
             />
           </div>
 
@@ -516,11 +754,23 @@ function QuestionCard({
                   )}
                 </Label>
                 <div className="flex gap-2">
-                  <Input value={option} onChange={(e) => updateOption(index, e.target.value)} />
+                  <Input
+                    value={option}
+                    onChange={(e) => updateOption(index, e.target.value)}
+                  />
                   <Button
-                    variant={editedQuestion.correctAnswer === index ? "default" : "outline"}
+                    variant={
+                      editedQuestion.correctAnswer === index
+                        ? 'default'
+                        : 'outline'
+                    }
                     size="sm"
-                    onClick={() => setEditedQuestion({ ...editedQuestion, correctAnswer: index })}
+                    onClick={() =>
+                      setEditedQuestion({
+                        ...editedQuestion,
+                        correctAnswer: index,
+                      })
+                    }
                   >
                     <CheckCircle className="h-4 w-4" />
                   </Button>
@@ -534,7 +784,11 @@ function QuestionCard({
               <Save className="h-4 w-4 mr-2" />
               Kaydet
             </Button>
-            <Button onClick={onCancel} variant="outline" className="flex-1 bg-transparent">
+            <Button
+              onClick={onCancel}
+              variant="outline"
+              className="flex-1 bg-transparent"
+            >
               <X className="h-4 w-4 mr-2" />
               İptal
             </Button>
@@ -561,11 +815,14 @@ function QuestionCard({
                   key={index}
                   className={`p-2 rounded border ${
                     index === question.correctAnswer
-                      ? "border-secondary bg-secondary/10 text-secondary-foreground"
-                      : "border-border"
+                      ? 'border-secondary bg-secondary/10 text-secondary-foreground'
+                      : 'border-border'
                   }`}
                 >
-                  <span className="font-medium">{String.fromCharCode(65 + index)}:</span> {option}
+                  <span className="font-medium">
+                    {String.fromCharCode(65 + index)}:
+                  </span>{' '}
+                  {option}
                 </div>
               ))}
             </div>
@@ -589,16 +846,27 @@ function QuestionCard({
   )
 }
 
-function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]) => void }) {
+function QuizGame({
+  teams,
+  setTeams,
+}: {
+  teams: Team[]
+  setTeams: (teams: Team[]) => void
+}) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [teamAnswers, setTeamAnswers] = useState<{ [teamId: string]: number | null }>({})
+  const [teamAnswers, setTeamAnswers] = useState<{
+    [teamId: string]: number | null
+  }>({})
   const [showResults, setShowResults] = useState(false)
   const [allAnswersSubmitted, setAllAnswersSubmitted] = useState(false)
   const [quizFinished, setQuizFinished] = useState(false)
   const [quizStats, setQuizStats] = useState<QuizStats>({
     totalQuestions: sampleQuestions.length,
     correctAnswers: teams.reduce((acc, team) => ({ ...acc, [team.id]: 0 }), {}),
-    teamAnswerHistory: teams.reduce((acc, team) => ({ ...acc, [team.id]: [] }), {}),
+    teamAnswerHistory: teams.reduce(
+      (acc, team) => ({ ...acc, [team.id]: [] }),
+      {}
+    ),
   })
 
   const currentQuestion = sampleQuestions[currentQuestionIndex]
@@ -618,7 +886,7 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
 
   const showQuestionResults = () => {
     if (!checkAllAnswersSubmitted()) {
-      alert("Tüm takımlar cevap vermeden sonuçları gösteremezsiniz!")
+      alert('Tüm takımlar cevap vermeden sonuçları gösteremezsiniz!')
       return
     }
 
@@ -645,9 +913,12 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
       teamAnswerHistory: teams.reduce(
         (acc, team) => ({
           ...acc,
-          [team.id]: [...prev.teamAnswerHistory[team.id], teamAnswers[team.id] ?? null],
+          [team.id]: [
+            ...prev.teamAnswerHistory[team.id],
+            teamAnswers[team.id] ?? null,
+          ],
         }),
-        {},
+        {}
       ),
     }))
 
@@ -678,7 +949,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Clock className="h-6 w-6 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Quiz Yarışması</h1>
+            <h1 className="text-3xl font-bold text-foreground">
+              Quiz Yarışması
+            </h1>
           </div>
           <Badge variant="secondary" className="text-lg px-4 py-2">
             Soru {currentQuestionIndex + 1} / {sampleQuestions.length}
@@ -693,9 +966,14 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {teams.map((team) => (
-                <div key={team.id} className="text-center p-3 bg-muted rounded-lg">
+                <div
+                  key={team.id}
+                  className="text-center p-3 bg-muted rounded-lg"
+                >
                   <h3 className="font-semibold text-sm mb-1">{team.name}</h3>
-                  <p className="text-2xl font-bold text-primary">{team.score}</p>
+                  <p className="text-2xl font-bold text-primary">
+                    {team.score}
+                  </p>
                 </div>
               ))}
             </div>
@@ -705,7 +983,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
         {/* Question Card */}
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle className="text-xl text-center">{currentQuestion.question}</CardTitle>
+            <CardTitle className="text-xl text-center">
+              {currentQuestion.question}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -715,13 +995,19 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
                   className={`p-4 border-2 rounded-lg ${
                     showResults
                       ? index === currentQuestion.correctAnswer
-                        ? "border-secondary bg-secondary/10 text-secondary-foreground"
-                        : "border-border bg-muted"
-                      : "border-border bg-card hover:border-primary/50 cursor-pointer"
+                        ? 'border-secondary bg-secondary/10  text-black'
+                        : 'border-border bg-muted'
+                      : 'border-border bg-card hover:border-primary/50 cursor-pointer'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Badge variant={showResults && index === currentQuestion.correctAnswer ? "default" : "outline"}>
+                    <Badge
+                      variant={
+                        showResults && index === currentQuestion.correctAnswer
+                          ? 'default'
+                          : 'outline'
+                      }
+                    >
                       {String.fromCharCode(65 + index)}
                     </Badge>
                     <span className="font-medium">{option}</span>
@@ -743,7 +1029,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
                 <CardHeader className="pb-3">
                   <CardTitle className="text-lg flex items-center justify-between">
                     {team.name}
-                    {teamAnswers[team.id] !== undefined && <CheckCircle className="h-5 w-5 text-secondary" />}
+                    {teamAnswers[team.id] !== undefined && (
+                      <CheckCircle className="h-5 w-5 text-secondary" />
+                    )}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -751,7 +1039,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
                     {currentQuestion.options.map((option, index) => (
                       <Button
                         key={index}
-                        variant={teamAnswers[team.id] === index ? "default" : "outline"}
+                        variant={
+                          teamAnswers[team.id] === index ? 'default' : 'outline'
+                        }
                         onClick={() => handleTeamAnswer(team.id, index)}
                         className="justify-start"
                         disabled={allAnswersSubmitted}
@@ -773,7 +1063,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
         {showResults && (
           <Card className="mb-6 border-secondary">
             <CardHeader>
-              <CardTitle className="text-center text-secondary">Soru Sonuçları</CardTitle>
+              <CardTitle className="text-center text-secondary">
+                Soru Sonuçları
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -785,7 +1077,9 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
                     <div
                       key={team.id}
                       className={`p-4 rounded-lg border-2 ${
-                        isCorrect ? "border-secondary bg-secondary/10" : "border-destructive bg-destructive/10"
+                        isCorrect
+                          ? 'border-white  bg-green-400/30'
+                          : 'border-destructive bg-destructive/10'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -797,11 +1091,15 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
                             <XCircle className="h-5 w-5 text-destructive" />
                           )}
                           <span className="font-bold">
-                            {teamAnswer !== undefined ? String.fromCharCode(65 + teamAnswer) : "Cevapsız"}
+                            {teamAnswer !== undefined
+                              ? String.fromCharCode(65 + teamAnswer)
+                              : 'Cevapsız'}
                           </span>
                         </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">{isCorrect ? "+10 puan" : "0 puan"}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {isCorrect ? '+10 puan' : '0 puan'}
+                      </p>
                     </div>
                   )
                 })}
@@ -813,12 +1111,16 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
         {/* Action Buttons */}
         <div className="text-center space-x-4">
           {!showResults ? (
-            <Button onClick={showQuestionResults} size="lg" disabled={!checkAllAnswersSubmitted()}>
+            <Button
+              onClick={showQuestionResults}
+              size="lg"
+              disabled={!checkAllAnswersSubmitted()}
+            >
               Sonuçları Göster
             </Button>
           ) : (
             <Button onClick={nextQuestion} size="lg">
-              {isLastQuestion ? "Quiz'i Bitir" : "Sonraki Soru"}
+              {isLastQuestion ? "Quiz'i Bitir" : 'Sonraki Soru'}
             </Button>
           )}
         </div>
@@ -827,19 +1129,30 @@ function QuizGame({ teams, setTeams }: { teams: Team[]; setTeams: (teams: Team[]
   )
 }
 
-function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats }) {
+function QuizResults({
+  teams,
+  quizStats,
+}: {
+  teams: Team[]
+  quizStats: QuizStats
+}) {
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score)
   const winner = sortedTeams[0]
   const maxScore = quizStats.totalQuestions * 10
-  const averageScore = teams.reduce((sum, team) => sum + team.score, 0) / teams.length
+  const averageScore =
+    teams.reduce((sum, team) => sum + team.score, 0) / teams.length
 
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <Trophy className="h-16 w-16 text-primary mx-auto mb-4" />
-          <h1 className="text-4xl font-bold text-foreground mb-2">Quiz Tamamlandı!</h1>
-          <p className="text-xl text-muted-foreground">Tebrikler tüm takımlara!</p>
+          <h1 className="text-4xl font-bold text-foreground mb-2">
+            Quiz Tamamlandı!
+          </h1>
+          <p className="text-xl text-muted-foreground">
+            Tebrikler tüm takımlara!
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -852,11 +1165,16 @@ function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <h2 className="text-3xl font-bold text-foreground mb-2">{winner.name}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                {winner.name}
+              </h2>
               <p className="text-xl text-primary font-semibold mb-4">
                 {winner.score} / {maxScore} Puan
               </p>
-              <Progress value={(winner.score / maxScore) * 100} className="w-full h-3" />
+              <Progress
+                value={(winner.score / maxScore) * 100}
+                className="w-full h-3"
+              />
               <p className="text-sm text-muted-foreground mt-2">
                 Başarı Oranı: {Math.round((winner.score / maxScore) * 100)}%
               </p>
@@ -874,15 +1192,21 @@ function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats
             <CardContent className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Toplam Soru:</span>
-                <span className="font-semibold">{quizStats.totalQuestions}</span>
+                <span className="font-semibold">
+                  {quizStats.totalQuestions}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Ortalama Skor:</span>
-                <span className="font-semibold">{Math.round(averageScore)} puan</span>
+                <span className="font-semibold">
+                  {Math.round(averageScore)} puan
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">En Yüksek Skor:</span>
-                <span className="font-semibold text-primary">{winner.score} puan</span>
+                <span className="font-semibold text-primary">
+                  {winner.score} puan
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Katılımcı Takım:</span>
@@ -910,19 +1234,27 @@ function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats
                   <div key={team.id} className="space-y-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Badge variant={index === 0 ? "default" : "secondary"} className="text-lg px-3 py-1">
+                        <Badge
+                          variant={index === 0 ? 'default' : 'secondary'}
+                          className="text-lg px-3 py-1"
+                        >
                           {index + 1}
                         </Badge>
                         <div>
                           <h3 className="text-lg font-semibold">{team.name}</h3>
                           <p className="text-sm text-muted-foreground">
-                            {correctCount} / {quizStats.totalQuestions} doğru cevap
+                            {correctCount} / {quizStats.totalQuestions} doğru
+                            cevap
                           </p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-2xl font-bold text-primary">{team.score}</p>
-                        <p className="text-sm text-muted-foreground">%{Math.round(accuracy)} başarı</p>
+                        <p className="text-2xl font-bold text-primary">
+                          {team.score}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          %{Math.round(accuracy)} başarı
+                        </p>
                       </div>
                     </div>
 
@@ -936,28 +1268,34 @@ function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats
 
                     {/* Answer History */}
                     <div className="flex gap-1 flex-wrap">
-                      {quizStats.teamAnswerHistory[team.id]?.map((answer, qIndex) => {
-                        const question = sampleQuestions[qIndex]
-                        const isCorrect = answer === question?.correctAnswer
+                      {quizStats.teamAnswerHistory[team.id]?.map(
+                        (answer, qIndex) => {
+                          const question = sampleQuestions[qIndex]
+                          const isCorrect = answer === question?.correctAnswer
 
-                        return (
-                          <div
-                            key={qIndex}
-                            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold ${
-                              answer === null
-                                ? "bg-muted text-muted-foreground"
-                                : isCorrect
-                                  ? "bg-secondary text-secondary-foreground"
-                                  : "bg-destructive text-destructive-foreground"
-                            }`}
-                            title={`Soru ${qIndex + 1}: ${
-                              answer === null ? "Cevapsız" : isCorrect ? "Doğru" : "Yanlış"
-                            }`}
-                          >
-                            {qIndex + 1}
-                          </div>
-                        )
-                      })}
+                          return (
+                            <div
+                              key={qIndex}
+                              className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold ${
+                                answer === null
+                                  ? 'bg-muted text-muted-foreground'
+                                  : isCorrect
+                                  ? 'bg-secondary text-secondary-foreground'
+                                  : 'bg-destructive text-destructive-foreground'
+                              }`}
+                              title={`Soru ${qIndex + 1}: ${
+                                answer === null
+                                  ? 'Cevapsız'
+                                  : isCorrect
+                                  ? 'Doğru'
+                                  : 'Yanlış'
+                              }`}
+                            >
+                              {qIndex + 1}
+                            </div>
+                          )
+                        }
+                      )}
                     </div>
                   </div>
                 )
@@ -977,22 +1315,30 @@ function QuizResults({ teams, quizStats }: { teams: Team[]; quizStats: QuizStats
                 <div
                   key={team.id}
                   className={`flex items-center justify-between p-4 rounded-lg ${
-                    index === 0 ? "bg-primary/10 border-2 border-primary" : "bg-muted"
+                    index === 0
+                      ? 'bg-primary/10 border-2 border-primary'
+                      : 'bg-muted'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Badge variant={index === 0 ? "default" : "secondary"} className="text-lg px-3 py-1">
+                    <Badge
+                      variant={index === 0 ? 'default' : 'secondary'}
+                      className="text-lg px-3 py-1"
+                    >
                       {index + 1}
                     </Badge>
                     <div>
                       <span className="text-lg font-semibold">{team.name}</span>
                       <p className="text-sm text-muted-foreground">
-                        {quizStats.correctAnswers[team.id]} / {quizStats.totalQuestions} doğru
+                        {quizStats.correctAnswers[team.id]} /{' '}
+                        {quizStats.totalQuestions} doğru
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-2xl font-bold text-primary">{team.score}</span>
+                    <span className="text-2xl font-bold text-primary">
+                      {team.score}
+                    </span>
                     <p className="text-sm text-muted-foreground">puan</p>
                   </div>
                 </div>
