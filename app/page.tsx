@@ -60,117 +60,129 @@ let sampleQuestions = [
     question: 'Hangisinin sayısı daha fazladır?',
     options: [
       'Dünya’daki kum tanesi sayısı',
-      'Samanyolu’ndaki yıldız sayısı',
+      'Gözlenebilir evrendeki yıldız sayısı',
       'İnsan vücudundaki hücre sayısı',
       'Dünya’daki ağaç sayısı',
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
   },
   {
     id: 2,
-    question: 'Hangisinin toplam uzunluğu daha fazladır?',
+    question: 'Hangisi daha azdır?',
     options: [
-      'Dünya’daki tüm DNA iplikleri',
-      'Dünya’daki tüm yollar',
-      'Dünya’daki tüm nehirler',
-      'Dünya’daki tüm tren rayları',
-    ],
-    correctAnswer: 0,
-  },
-  {
-    id: 3,
-    question: 'Hangi olay daha sık yaşanır?',
-    options: [
-      'Kalbin bir yılda attığı toplam sayı',
+      'Bir kalbin bir yılda attığı toplam sayı',
       'Bir yılda insanların toplu olarak göz kırpma sayısı',
-      'Bir yılda dünyada satılan kitap sayısı',
+      '1 yıllık süreçte dünyadaki tüm insanların toplam nefes alıp verme sayısı',
       'Bir yılda doğan bebek sayısı',
     ],
     correctAnswer: 1,
   },
+  // {
+  //   id: 3,
+  //   question: 'Hangi olay daha sık yaşanır?',
+  //   options: [
+  //     'Kalbin bir yılda attığı toplam sayı',
+  //     'Bir yılda insanların toplu olarak göz kırpma sayısı',
+  //     'Bir yılda dünyada satılan kitap sayısı',
+  //     'Bir yılda doğan bebek sayısı',
+  //   ],
+  //   correctAnswer: 1,
+  // },
   {
     id: 4,
-    question: 'Hangi yapının yüzey alanı daha büyüktür?',
+    question: 'Kimin boyu daha uzundur?',
     options: [
-      'İnsan akciğerlerindeki alveoller',
-      'Bir futbol sahası',
-      'Dünyadaki en büyük göl',
-      'Ay’ın yüzeyi',
-    ],
-    correctAnswer: 3,
-  },
-  {
-    id: 5,
-    question: 'Hangisi daha hızlıdır?',
-    options: ['Işık', 'Ses', 'Formula 1 arabası', 'Jet uçağı'],
-    correctAnswer: 0,
-  },
-  {
-    id: 6,
-    question: 'Hangisinin enerjisi daha büyüktür?',
-    options: [
-      'Hiroşima’ya atılan atom bombası',
-      'Bir yıldırım çarpması',
-      'Güneş’in 1 saniyede yaydığı enerji',
-      'Bir insanın ömür boyu yaktığı kalori',
+      'Canan hoca',
+      '9 cm topuklu Seçil Hoca',
+      '8 cm topuklu Zişan hoca',
+      '25 cm platforma çıkmış Oya hoca',
     ],
     correctAnswer: 2,
   },
   {
-    id: 7,
+    id: 5,
     question: 'Hangisi daha ağırdır?',
     options: [
       'Büyük Çin Seddi',
       'Everest Dağı',
-      'Tüm dünyadaki karıncalar',
-      'Tüm dünyadaki insanlar',
+      'Dünyadaki tüm karıncalar',
+      'Dünyadaki tüm insanlar',
+    ],
+    correctAnswer: 3,
+  },
+  {
+    id: 6,
+    question: 'Hangisinin sayısı daha fazladır?',
+    options: [
+      'Bilnet Okulları Kampüs Sayısı ',
+      'Kampüsümüzdeki Erkek Öğretmen Sayısı',
+      'Kampüsümüzdeki Ortaokul Şube Sayısı',
+      'Kampüsümüzdeki Derse Giren İngilizce Öğretmeni Sayısı',
     ],
     correctAnswer: 1,
   },
   {
-    id: 8,
-    question: 'Hangisinin hacmi daha büyüktür?',
+    id: 7,
+    question: 'Hangi şarkıda aşk kelimesi daha çok geçiyordur?',
     options: [
-      'Dünyadaki tüm buzullar',
-      'Amazon Nehri',
-      'Karadeniz',
-      'Tüm okyanuslar',
+      'Sertap Erener- Aşk',
+      'Teoman-Aşk Kırıntısı',
+      'Yıldız Tilbe- Aşk Laftan Anlamaz ki',
+      'Kenan Doğulu- Aşkım Aşkım',
+    ],
+    correctAnswer: 0,
+  },
+  {
+    id: 8,
+    question: 'Hangisi daha uzun sürmüştür?',
+    options: [
+      'İlhan Hocanın -2 nöbeti',
+      'Şuri Hocanın ders doldurmaları',
+      'Bir öğretmenin veli toplantı tutanağı yazması',
+      'Ebru Hocanın etütleri',
     ],
     correctAnswer: 3,
   },
   {
     id: 9,
-    question: 'Hangisinin sayısı daha fazladır?',
+    question: 'Hangisi daha azdır?',
     options: [
-      'İnsan beynindeki nöronlar',
-      'Dünya’daki tavuklar',
-      'Dünya’daki şehirler',
-      'Dünya’daki kitaplar',
+      'Ortalama bir insanın 1 saat boyunca attığı adım sayısı',
+      'Dünya üzerindeki okyanusların toplam su miktarı (litre cinsinden)',
+      'Bir basketbol topunun ağırlığı (gram cinsinden)',
+      'Uluslararası Uzay İstasyonu nun (ISS) bir ayda Dünya çevresinde attığı tur sayısı',
     ],
-    correctAnswer: 1,
+    correctAnswer: 3,
   },
   {
     id: 10,
-    question: 'Hangisinin ömrü daha uzundur?',
-    options: ['Kaplumbağa', 'Balina', 'Ağaç (Sekoya)', 'İnsan'],
+    question:
+      'Okulumuzda ismi hangi harfle başlayan öğretmen sayısı daha fazladır?',
+    options: ['G', 'H', 'M', 'S'],
     correctAnswer: 2,
   },
   {
     id: 11,
-    question: 'Hangisinin sıcaklığı daha yüksektir?',
+    question: 'Hangisi Daha Büyük?',
     options: [
-      'Güneş’in yüzeyi',
-      'Volkan lavı',
-      'Yıldırım çakması',
-      'Mum alevi',
+      'Amazon Nehri nin uzunluğu',
+      'Nil Nehri nin uzunluğu',
+      'Yangtze Nehri nin uzunluğu',
+      'Mississippi-Missouri Nehri Sistemi',
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
   },
   {
     id: 12,
-    question: 'Hangisi daha eskidir?',
-    options: ['Ay', 'Dünya', 'Güneş', 'Samanyolu Galaksisi'],
-    correctAnswer: 3,
+    question: 'Bilnet te hangi bilgi daha hızlı yayılır?',
+    options: [
+      'Dress-code',
+'Sosyal medya paylaşımları',
+'Üst yönetim okulumuzda bilgisi',
+'Nöbet çizelgesi'
+
+    ],
+    correctAnswer: 2,
   },
   {
     id: 13,
@@ -1111,13 +1123,13 @@ function QuizGame({
                           teamAnswers[team.id] === index ? 'default' : 'outline'
                         }
                         onClick={() => handleTeamAnswer(team.id, index)}
-                        className="justify-start"
+                        className="justify-start p-2 h-16"
                         disabled={allAnswersSubmitted}
                       >
                         <Badge variant="secondary" className="mr-2">
                           {String.fromCharCode(65 + index)}
                         </Badge>
-                        <p className="text-wrap">{option}</p>
+                        <p className="text-wrap text-sm">{option}</p>
                       </Button>
                     ))}
                   </div>
