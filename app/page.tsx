@@ -92,10 +92,10 @@ let sampleQuestions = [
     id: 4,
     question: 'Kimin boyu daha uzundur?',
     options: [
-      'Canan hoca',
+      'Canan Hoca',
       '9 cm topuklu Seçil Hoca',
-      '8 cm topuklu Zişan hoca',
-      '25 cm platforma çıkmış Oya hoca',
+      '8 cm topuklu Zişan Hoca',
+      '25 cm platforma çıkmış Oya Hoca',
     ],
     correctAnswer: 2,
   },
@@ -108,7 +108,7 @@ let sampleQuestions = [
       'Dünyadaki tüm karıncalar',
       'Dünyadaki tüm insanlar',
     ],
-    correctAnswer: 3,
+    correctAnswer: 1,
   },
   {
     id: 6,
@@ -149,7 +149,7 @@ let sampleQuestions = [
     options: [
       'Ortalama bir insanın 1 saat boyunca attığı adım sayısı',
       'Dünya üzerindeki okyanusların toplam su miktarı (litre cinsinden)',
-      'Bir basketbol topunun ağırlığı (gram cinsinden)',
+      'Bir basketbol topunun kütlesi (gram cinsinden)',
       'Uluslararası Uzay İstasyonu nun (ISS) bir ayda Dünya çevresinde attığı tur sayısı',
     ],
     correctAnswer: 3,
@@ -184,79 +184,79 @@ let sampleQuestions = [
     ],
     correctAnswer: 2,
   },
-  {
-    id: 13,
-    question: 'Hangisi daha küçüktür?',
-    options: ['Atom', 'Elektron', 'Proton', 'Hücre'],
-    correctAnswer: 1,
-  },
-  {
-    id: 14,
-    question: 'Hangisinin hızı daha düşüktür?',
-    options: ['Kaplumbağa', 'Salyangoz', 'İnsan yürüyüşü', 'Koşan kedi'],
-    correctAnswer: 1,
-  },
-  {
-    id: 15,
-    question: 'Hangisinin sayısı daha fazladır?',
-    options: [
-      'Dünya’daki planktonlar',
-      'Dünya’daki kuşlar',
-      'Dünya’daki arabalar',
-      'Dünya’daki bilgisayarlar',
-    ],
-    correctAnswer: 0,
-  },
-  {
-    id: 16,
-    question: 'Hangisi daha büyüktür?',
-    options: [
-      'Dünyanın ekvator uzunluğu',
-      'Ay’ın çevresi',
-      'Mars’ın çevresi',
-      'Türkiye’nin sınır uzunluğu',
-    ],
-    correctAnswer: 0,
-  },
-  {
-    id: 17,
-    question: 'Hangisinin toplam uzunluğu daha fazladır?',
-    options: [
-      'İnsan damarları',
-      'Dünya’daki tüm tren yolları',
-      'Dünya’daki tüm otoyollar',
-      'Amazon Nehri',
-    ],
-    correctAnswer: 0,
-  },
-  {
-    id: 18,
-    question: 'Hangisinin kütlesi daha büyüktür?',
-    options: [
-      'Everest Dağı',
-      'Dünyadaki tüm atmosfer',
-      'Dünyadaki tüm insanlar',
-      'Dünyadaki tüm balıklar',
-    ],
-    correctAnswer: 1,
-  },
-  {
-    id: 19,
-    question: 'Hangisi daha parlaktır?',
-    options: ['Güneş', 'Dolunay', 'Yıldırım', 'Venüs gezegeni'],
-    correctAnswer: 0,
-  },
-  {
-    id: 20,
-    question: 'Hangisi daha uzundur?',
-    options: [
-      'Nil Nehri',
-      'Amazon Nehri',
-      'Büyük Çin Seddi',
-      'Dünyanın çevresi',
-    ],
-    correctAnswer: 3,
-  },
+  // {
+  //   id: 13,
+  //   question: 'Hangisi daha küçüktür?',
+  //   options: ['Atom', 'Elektron', 'Proton', 'Hücre'],
+  //   correctAnswer: 1,
+  // },
+  // {
+  //   id: 14,
+  //   question: 'Hangisinin hızı daha düşüktür?',
+  //   options: ['Kaplumbağa', 'Salyangoz', 'İnsan yürüyüşü', 'Koşan kedi'],
+  //   correctAnswer: 1,
+  // },
+  // {
+  //   id: 15,
+  //   question: 'Hangisinin sayısı daha fazladır?',
+  //   options: [
+  //     'Dünya’daki planktonlar',
+  //     'Dünya’daki kuşlar',
+  //     'Dünya’daki arabalar',
+  //     'Dünya’daki bilgisayarlar',
+  //   ],
+  //   correctAnswer: 0,
+  // },
+  // {
+  //   id: 16,
+  //   question: 'Hangisi daha büyüktür?',
+  //   options: [
+  //     'Dünyanın ekvator uzunluğu',
+  //     'Ay’ın çevresi',
+  //     'Mars’ın çevresi',
+  //     'Türkiye’nin sınır uzunluğu',
+  //   ],
+  //   correctAnswer: 0,
+  // },
+  // {
+  //   id: 17,
+  //   question: 'Hangisinin toplam uzunluğu daha fazladır?',
+  //   options: [
+  //     'İnsan damarları',
+  //     'Dünya’daki tüm tren yolları',
+  //     'Dünya’daki tüm otoyollar',
+  //     'Amazon Nehri',
+  //   ],
+  //   correctAnswer: 0,
+  // },
+  // {
+  //   id: 18,
+  //   question: 'Hangisinin kütlesi daha büyüktür?',
+  //   options: [
+  //     'Everest Dağı',
+  //     'Dünyadaki tüm atmosfer',
+  //     'Dünyadaki tüm insanlar',
+  //     'Dünyadaki tüm balıklar',
+  //   ],
+  //   correctAnswer: 1,
+  // },
+  // {
+  //   id: 19,
+  //   question: 'Hangisi daha parlaktır?',
+  //   options: ['Güneş', 'Dolunay', 'Yıldırım', 'Venüs gezegeni'],
+  //   correctAnswer: 0,
+  // },
+  // {
+  //   id: 20,
+  //   question: 'Hangisi daha uzundur?',
+  //   options: [
+  //     'Nil Nehri',
+  //     'Amazon Nehri',
+  //     'Büyük Çin Seddi',
+  //     'Dünyanın çevresi',
+  //   ],
+  //   correctAnswer: 3,
+  // },
 ]
 
 
@@ -327,12 +327,12 @@ export default function QuizHomePage() {
           <div className="flex items-center justify-center gap-3 m-4">
             <Trophy className="h-8 w-8 text-primary" />
             <h1 className="text-4xl font-bold text-white">
-              Quiz Yarışması
+              SALLA BAKALIM
             </h1>
             <Trophy className="h-8 w-8 text-primary" />
           </div>
           <p className="text-muted-foreground text-lg">
-            Takımınızı kurun ve heyecan verici quiz yarışmasına katılın!
+            Takımınızı kurun ve heyecan verici salla bakalım yarışmasına katılın!
           </p>
           <Button
             variant="outline"
@@ -991,7 +991,7 @@ function QuizGame({
           <div className="flex items-center justify-center gap-3 m-4">
             <Clock className="h-6 w-6 text-primary" />
             <h1 className="text-3xl font-bold text-white">
-              Quiz Yarışması
+              SALLA BAKALIM
             </h1>
           </div>
           <div className="flex items-center justify-center gap-4 mb-4">
